@@ -1,0 +1,10 @@
+/* Empty. Add your own CSS if you like */
+.settings-icon {
+  position: absolute;
+}
+.settings-icon > a {
+  font-size: 35px;
+}
+.use-white-spaces {
+  white-space: pre-wrap;
+}
