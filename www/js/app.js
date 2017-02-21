@@ -46,9 +46,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
         gameSrc: function($rootScope) {
           return $rootScope.src;
         },
-        loadGame: function(gameSrc, $http, $quixe){
+        loadGame: function(gameSrc, $http, $quixe, $rootScope){
           $http.get(gameSrc).then(function(data) {
             $quixe.load(data);
+            $rootScope.gameLoading = false;
           });
         }
       }

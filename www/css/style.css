@@ -8,3 +8,22 @@
 .use-white-spaces {
   white-space: pre-wrap;
 }
+ion-spinner{
+  position: relative;
+  left: 50%;
+  top: 50%;
+}
+ion-spinner svg{
+  height: 40px;
+  width: 60px;
+}
+.popclose {
+  text-align: right;
+  position: absolute;
+  top: 0px;
+  right: -4px;
+  z-index:1000;
+  color: #029dff !important;
+  padding: 0px !important;
+  background-color: transparent !important;
+}

@@ -3,7 +3,9 @@
 app.controller("homeCtrl", function($rootScope, $state){
     var home = this;
     $rootScope.src = "";
+    $rootScope.gameLoading = false;
     home.loadGame = function(){
+      $rootScope.gameLoading = true;
       if(ionic.Platform.isAndroid()){
         $rootScope.src="/android_asset/www/stories/document.json";
       }

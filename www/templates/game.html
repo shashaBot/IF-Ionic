@@ -9,7 +9,7 @@
       </select>
     </form>-->
     <div class="settings-icon">
-      <a class="button button-icon ion-gear-b"></a>
+      <a class="button button-icon ion-gear-b" ng-click="game.showSettings()"></a>
     </div>
     <div>
       {{game.play.PLOG}}
@@ -23,7 +23,6 @@
       </div>
     </div>
     <div>{{game.play.TURN}}</div>
-    <a class="button button-icon ion-code-download" ng-click="game.loadSavedGame()"></a>
   </ion-content>
 
   <ion-footer-bar keyboard-attach class="bar-dark item-input-inset" >

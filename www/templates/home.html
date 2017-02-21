@@ -1,5 +1,6 @@
 <ion-view view-title="IF in mobile">
   <ion-content class="padding">
-    <button class="button button-dark button-block" ng-click="home.loadGame()">Load Game</button>
+    <button class="button button-dark button-block" ng-click="home.loadGame()" ng-show="!gameLoading">Load Game</button>
   </ion-content>
+  <ion-spinner ng-show="gameLoading" icon="dots" class="spinner-assertive"></ion-spinner>
 </ion-view>

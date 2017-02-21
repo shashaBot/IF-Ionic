@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q){
+app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q, $ionicPopup, $scope){
   var game = this;
   game.readkey = false;
   game.src = gameSrc;
@@ -22,7 +22,27 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q){
   //   console.log("game started::", game.started); //now the game has started, so the prologue is removed and first room's description is to be printed.
   // };
 
-  game.loadSavedGame = function() {
+  game.showSettings = function() {
+    var settingsPopup = $ionicPopup.show({
+      templateUrl: 'templates/settingsPopup.html',
+      title: '<b>Settings</b>',
+      scope: $scope,
+      buttons: [
+        {
+      		text: '<i class="icon ion-close-circled"></i>',
+      		type:'popclose',
+      		onTap: function(e) {
+            return 'close it already';
+      		}
+	      }
+      ]
+    });
+    settingsPopup.then(function(res) {
+      console.log(res);
+    });
+  }
+
+  $scope.loadSavedGame = function() {
     savedGameId = game.gameInfo.serialNumber;
     $quixe.restore_state(JSON.parse(window.localStorage.getItem(savedGameId+": savedPrgrs")));
     game.send('sendingSthBecauseQuixeExpectSth');
@@ -36,7 +56,26 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q){
     if (this.readkey) {
       $quixe.readkey_resume(input.charCodeAt(0));
     } else {
-      $quixe.readline_resume(input);
+      if(game.input === 'save' || game.input === 'restore' || game.input === 'restart'){
+        text = {
+          author: "game",
+          msg: "Only if it could be that simple!"
+        };
+        game.texts.push(text);
+        text = {};
+      }
+      else if (game.input === 'look' || input === 'look'){
+        //show something or not, you decide.
+        text = {
+          author: "game",
+          msg: "Yeah, yeah I'm looking or at least trying to."
+        };
+        game.texts.push(text);
+        text = {};
+      }
+      else{
+        $quixe.readline_resume(input);
+      }
     }
     if(game.input){
       text = {
@@ -51,7 +90,7 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q){
     game.input = '';
   };
 
-  var saveProgress = function() {
+  $scope.saveProgress = function() {
     game.send('save');
   };
 
