@@ -23,12 +23,10 @@
       </div>
     </div>
     <div>{{game.play.TURN}}</div>
+    <!-- <digi-clock time="game.play.TIME"></digi-clock> -->
   </ion-content>
 
-  <ion-footer-bar keyboard-attach class="bar-dark item-input-inset" >
-    <label class="item-input-wrapper">
-        <input type="text" placeholder="Enter command here" ng-model="game.input" ng-enter="game.send()"/>
-    </label>
-    <button class="button button-icon ion-android-send" ng-click="game.send()"></button>
+  <ion-footer-bar class="bar-dark item-input-inset" >
+      <button class="button button-icon ion-ios-game-controller-a"></button>
   </ion-footer-bar>
 </ion-view>

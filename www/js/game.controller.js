@@ -29,7 +29,7 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q, $
       scope: $scope,
       buttons: [
         {
-      		text: '<i class="icon ion-close-circled"></i>',
+      		text: '<i class="icon ion-ios-close"></i>',
       		type:'popclose',
       		onTap: function(e) {
             return 'close it already';
@@ -43,7 +43,9 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q, $
   }
 
   $scope.loadSavedGame = function() {
-    savedGameId = game.gameInfo.serialNumber;
+    if(!savedGameId){
+      savedGameId = game.gameInfo.serialNumber;
+    }
     $quixe.restore_state(JSON.parse(window.localStorage.getItem(savedGameId+": savedPrgrs")));
     game.send('sendingSthBecauseQuixeExpectSth');
     //remove [blah blah] from main channel
@@ -104,11 +106,13 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q, $
       savedGameId = game.gameInfo.serialNumber;
       console.log(game.gameInfo);
     }
-    text = {
-      author: "game",
-      msg: game.play.MAIN
-    };
-    game.texts.push(text);
+    if(game.play.MAIN !== "[stopped: success]\n"){
+      text = {
+        author: "game",
+        msg: game.play.MAIN
+      };
+      game.texts.push(text);
+    }
     text = {};
     console.log("game.text::", game.texts);
     $ionicScrollDelegate.$getByHandle('gameplay-page').scrollBottom(true);

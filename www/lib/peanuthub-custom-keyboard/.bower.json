@@ -1,0 +1,49 @@
+{
+  "name": "peanuthub-custom-keyboard",
+  "homepage": "https://bitbucket.org/peanuthub/peanuthub-custom-keyboard",
+  "authors": [
+    "Peanut Hub Ltda. <contacto@peanuthub.cl> (http://www.peanuthub.cl)",
+    "David Gaete <david.munoz@peanuthub.cl> (https://github.com/dmunozgaete)",
+    "Sebastian Moreno <sebastian.moreno@peanuthub.cl> (https://github.com/px740)"
+  ],
+  "description": "Unobstrive Ionic Custom Keyboard for Ionic 1",
+  "main": [
+    "dist/peanuthub-custom-keyboard.js",
+    "dist/peanuthub-custom-keyboard.css"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "Gale",
+    "AngularJS",
+    "Ionic",
+    "PeanutHub",
+    "Angular",
+    "DmunozGaete",
+    "px740"
+  ],
+  "license": "Apache 2.0 License",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "grunt",
+    "src",
+    "Gruntfile.js",
+    "package.json",
+    "tests"
+  ],
+  "dependencies": {},
+  "_release": "8198fcf638",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "8198fcf6385a7ffa31e810c1b668990579b14b47"
+  },
+  "_source": "https://bitbucket.org/peanuthub/peanuthub-custom-keyboard.git",
+  "_target": "*",
+  "_originalSource": "peanuthub-custom-keyboard",
+  "_direct": true
+}

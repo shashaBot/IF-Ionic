@@ -61,6 +61,8 @@
 
 /* Put everything inside the Quixe namespace. */
 
+(function() {
+
     function quixe()
     {
         /* Create the "self" object. (No relation to the Inform "self" global.) */
@@ -6716,11 +6718,14 @@
             quixe_resume();
         };
         instance.restore_snapshot = vm_restoresnapshot;
+
         self.instance = instance;
 
         return instance;
     }
 
-  app.factory('$quixe', quixe);
+    angular.module('iFiction').factory('$quixe', quixe)
+
+})();
 
 /* End of Quixe library. */

@@ -1,4 +1,8 @@
-Version 1/050515 of Quixe Channels Core (for Glulx only) by Vikar begins here.
+Quixe Channels Extended (for Glulx only) by Vikar begins here.
+
+"Quixe Channels extension to be used for making story files runnable through IF-ionic."
+
+"based on original Quixe Channels Core by David Cornelson"
 
 Chapter 1 - FyreVM-specific constants and definitions
 
@@ -42,6 +46,8 @@ Constant FYC_TURN = ('T' * $1000000) + ('U' * $10000) + ('R' * $100) + 'N';			! 
 Constant FYC_STORYINFO = ('I' * $1000000) + ('N' * $10000) + ('F' * $100) + 'O';			! INFO
 Constant FYC_SCORENOTIFY = ('S' * $1000000) + ('N' * $10000) + ('O' * $100) + 'T';			! SNOT
 Constant FYC_BANNER = ('B' * $1000000) + ('A' * $10000) + ('N' * $100) + 'N';			! BANN
+Constant FYC_GAMENOTIFY = ('N' * $1000000) + ('O' * $10000) + ('T' * $100) + 'F';			! NOTF
+Constant FYC_IOBJ = ('I' * $1000000) + ('O' * $10000) + ('B' * $100) + 'J';			! IOBJ
 
 ! Slots for FY_SETVENEER.
 Constant FYV_Z__Region = 1;
@@ -1320,10 +1326,17 @@ To Select the Turn Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_TURN); -).
 
 To Select the Story Info Channel:
-	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_STORYINFO); -);
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_STORYINFO); -).
 
 To Select the Score Notification Channel:
-	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORENOTIFY); -);
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORENOTIFY); -).
+	
+To Select the Game Notification Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_GAMENOTIFY); -).
+	
+To Select the Objects Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_IOBJ); -).
+		
 
 Section 1b - Required Channels - Not For Release
 
@@ -1352,17 +1365,26 @@ To Select the Death Channel:
 
 To Select the Turn Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_TURN); else print "** Turn Channel ON **"; -).
+	
+To Select the Banner Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_BANNER); else print "** Banner Channel ON **"; -).
 
 To Select the Story Info Channel:
-	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_STORYINFO); else print "** Story Info channel ON **";  -);
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_STORYINFO); else print "** Story Info channel ON **";  -).
 
 To Select the Score Notification Channel:
-	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORENOTIFY); else print "** Score Notification channel ON **";  -);
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORENOTIFY); else print "** Score Notification channel ON **";  -).
+	
+To Select the Game Notification Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_GAMENOTIFY); else print "** Game Notification channel ON **";  -).
+	
+To Select the Objects Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_IOBJ); else print "** Objects channel ON **";  -)
 
 Chapter 5 - Transition Requested
 
 To Request Transition:
-	(- if (is_fyrevm) FyreCall(FY_REQUEST_TRANSITION); -);
+	(- if (is_fyrevm) FyreCall(FY_REQUEST_TRANSITION); -).
 
 Chapter 6 - Story Info
 
@@ -1370,8 +1392,30 @@ When play begins while outputting channels (this is the story info channel rule)
 	select the story info channel;
 	say "{ [quotation mark]storyTitle[quotation mark]: [quotation mark][story title][quotation mark], [quotation mark]storyHeadline[quotation mark]: [quotation mark][story headline][quotation mark], [quotation mark]storyAuthor[quotation mark]: [quotation mark][story author][quotation mark], [quotation mark]storyCreationYear[quotation mark]: [quotation mark][story creation year][quotation mark], [quotation mark]releaseNumber[quotation mark]: [quotation mark][release number][quotation mark], [quotation mark]serialNumber[quotation mark]: [quotation mark][story serial number][quotation mark], [quotation mark]inform7Build[quotation mark]: [quotation mark][I7 version number][quotation mark], [quotation mark]inform6Library[quotation mark]: [quotation mark][I6 library number][quotation mark], [quotation mark]inform7Library[quotation mark]: [quotation mark][I7 library number][quotation mark], [quotation mark]strictMode[quotation mark]: [quotation mark][strict mode][quotation mark], [quotation mark]debugMode[quotation mark]: [quotation mark][debug mode][quotation mark] }";
 	select the main channel.
+	
+Chapter 7 - Banner
 
-Chapter 7 - Miscellany
+Before printing the banner text:
+	select the Banner Channel.
+	
+After printing the banner text:
+	select the main channel.
+	
+Chapter 8 - Saving and restoring
+
+Check saving the game:
+	select the game notification channel.
+
+Report saving the game:
+	select the main channel.
+	
+Check restoring the game:
+	select the game notification channel.
+
+Report restoring the game:
+	select the main channel.
+
+Chapter 9 - Miscellany
 
 Include (-
 
@@ -1380,7 +1424,7 @@ Constant SUPPRESS_DEATH_SCORE = 1;
 
 -) before "Language.i6t".
 
-Quixe Channels Core ends here.
+Quixe Channels Extended ends here.
 
 ---- DOCUMENTATION ----
 
@@ -1417,4 +1461,27 @@ Turn (TURN) - The turn channel has the turn count, regardless if time is the pri
 
 Story Info (INFO) - The story info channel contains JSON with all of the banner and general story information.
 
+Banner (BANN) - The banner channel contains the banner text which is printed at the start of play.
+
+Objects (IOBJ) - The objects channel contains the JSON with the list of objects that are interactable by the player at every turn.
+
+Game Notification (NOTF) - The game notifications channel contains the text for game notifications  (reporting out of world actions) are to be displayed like "Ok."  after successful save/restore.
+
 Score Notification (SNOT) - When scoring is used and the score changes, the change value (up or down) will be posted to this channel.
+
+
+For Objects Channel:
+
+In source text you have to include a command like:
+	
+	Every turn:
+		select the objects channel;
+		let L be the list of visible things that are not the player; [you can include your own description to make certain objects accessible or inaccessible through list]
+		let entries be the number of entries in L;
+		say "{[no line break]";
+		repeat with item running through L:
+			say "[quotation mark][item][quotation mark][no line break]";
+			unless item is entry entries in L:
+				say ",[no line break]";
+		say "}";
+		select the main channel.
