@@ -1,5 +1,5 @@
 <ion-view view-title="{{game.play.INFO.storyTitle || 'iFiction'}}">
-  <ion-content class="has-footer padding" delegate-handle="gameplay-page">
+  <ion-content class="padding" has-footer="true" has-header="true" delegate-handle="gameplay-page">
     <!-- <form ng-submit="app.send()" novalidate>
       <input ng-model="app.input" />
       <input type="button" ng-click="app.save()" value="save" ng-disabled="app.readkey">
@@ -25,8 +25,8 @@
     <div>{{game.play.TURN}}</div>
     <!-- <digi-clock time="game.play.TIME"></digi-clock> -->
   </ion-content>
-
-  <ion-footer-bar class="bar-dark item-input-inset" >
-      <button class="button button-icon ion-ios-game-controller-a"></button>
+  <ion-footer-bar class="bar-dark" >
+    <button class="button button-icon ion-ios-game-controller-a" ng-click="game.showControlBoard();"></button>
+      <control-board ng-show="game.controlBoardVisible" gameplay="game.TEST" execute="game.execute"></control-board>
   </ion-footer-bar>
 </ion-view>

@@ -27,3 +27,10 @@ ion-spinner svg{
   padding: 0px !important;
   background-color: transparent !important;
 }
+
+.cb-element {
+}
+
+.bar-footer {
+  height: auto !important;
+}

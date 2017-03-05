@@ -14,13 +14,41 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q, $
   var text = {};
   var savedGameId;
   var savedGameObj;
-  //when player clicks on start after prologue is printed, the game sets turn count back to 0
-  //we remove all the mixed data received and then start the game play with player looking in the room
-  //turn count climbs back to 1.
-  // game.startPlay = function(){
-  //   game.started = true;
-  //   console.log("game started::", game.started); //now the game has started, so the prologue is removed and first room's description is to be printed.
-  // };
+
+  function initControls(){
+    game.controls = [];
+    for (var control in game.play.CONT){
+      game.controls.push(control);
+    }
+    game.directions = [];
+    for (var direction in game.play.DIRT){
+      game.directions.push(direction);
+    }
+    game.objects = [];
+    for (var object in game.play.IOBJ){
+      game.objects.push(object);
+    }
+  }
+
+  game.controlBoardVisible = false;
+
+  game.showControlBoard = function (){
+    game.controlBoardVisible = !game.controlBoardVisible;
+    console.log("control-board::", game.controlBoardVisible);
+  }
+
+  game.TEST = [{text: '1', command: 'balh1'},
+              {text: '2', command: 'balh2'},
+              {text: '3', command: 'balh3'},
+              {text: '4', command: 'balh4'},
+              {text: '5', command: 'balh5'},
+              {text: '6', command: 'balh6'},
+              {text: '7', command: 'balh7'}
+            ];
+
+  game.execute = function(command) {
+    console.log("You tapped command::", command);
+  }
 
   game.showSettings = function() {
     var settingsPopup = $ionicPopup.show({
@@ -114,6 +142,7 @@ app.controller('gameCtrl', function(gameSrc, $quixe, $ionicScrollDelegate, $q, $
       game.texts.push(text);
     }
     text = {};
+    initControls();
     console.log("game.text::", game.texts);
     $ionicScrollDelegate.$getByHandle('gameplay-page').scrollBottom(true);
   });
