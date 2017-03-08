@@ -1,10 +1,10 @@
-<!-- <ion-content has-bouncing="false" scrollbar-y="true" padding="true" delegate-handle="control-board-scroll"> -->
-  <!-- <div class="cb-element"> -->
-    <!-- <span ng-repeat="command in gameplay">
-      <button class="button button-positive button-outline" ng-click="execute()('blah')">
-        {{command.text}}
-      </button>
-    </span> -->
-  <!-- </div> -->
-<!-- </ion-content> -->
-<textarea></textarea>
+<ion-scroll id="control-buttons" zooming="false" direction="y" style="max-height: 220px" padding="true" has-bouncing="false">
+  <div class="row wrap-items">
+    <button class="col button" id="control-button" ng-repeat="button in gameplay" ng-click="select()(button)" dynamic-layout
+    dloptions="{breakpoints: [9, 14],
+                length: button.text.length}">
+      {{button.text}}
+    </button>
+    <button class="col col-100 button" id="cancel-control-button" ng-click="cancel()()">Cancel</button>
+  </div>
+</ion-scroll>

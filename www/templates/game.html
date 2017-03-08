@@ -1,13 +1,5 @@
 <ion-view view-title="{{game.play.INFO.storyTitle || 'iFiction'}}">
   <ion-content class="padding" has-footer="true" has-header="true" delegate-handle="gameplay-page">
-    <!-- <form ng-submit="app.send()" novalidate>
-      <input ng-model="app.input" />
-      <input type="button" ng-click="app.save()" value="save" ng-disabled="app.readkey">
-      <input type="button" ng-click="app.load()" value="load" ng-disabled="app.readkey || !app.saves.length || !app.selectedSave">
-      <select ng-model="app.selectedSave" ng-disabled="app.readkey || !app.saves.length">
-        <option ng-repeat="save in app.saves" ng-cloak>{{save}}</option>
-      </select>
-    </form>-->
     <div class="settings-icon">
       <a class="button button-icon ion-gear-b" ng-click="game.showSettings()"></a>
     </div>
@@ -23,10 +15,12 @@
       </div>
     </div>
     <div>{{game.play.TURN}}</div>
+    <div class="top text-center">
+      <button class="button button-icon ion-ios-game-controller-a" ng-click="game.showControlBoard();"></button>
+    </div>
     <!-- <digi-clock time="game.play.TIME"></digi-clock> -->
   </ion-content>
   <ion-footer-bar class="bar-dark" >
-    <button class="button button-icon ion-ios-game-controller-a" ng-click="game.showControlBoard();"></button>
-      <control-board ng-show="game.controlBoardVisible" gameplay="game.TEST" execute="game.execute"></control-board>
+    <control-board ng-show="game.controlBoardVisible" gameplay="game.controls" cancel="game.cancelControl" select="game.selectControl" style="width: inherit;"></control-board>
   </ion-footer-bar>
 </ion-view>

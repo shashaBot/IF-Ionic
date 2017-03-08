@@ -34,3 +34,12 @@ ion-spinner svg{
 .bar-footer {
   height: auto !important;
 }
+.wrap-items {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
