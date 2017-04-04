@@ -35,19 +35,23 @@ Constant FY_REQUEST_TRANSITION = 7;
 !
 ! Required Channels for FY_CHANNEL.
 !
-Constant FYC_MAIN = ('M' * $1000000) + ('A' * $10000) + ('I' * $100) + 'N';			! MAIN
-Constant FYC_PROMPT = ('P' * $1000000) + ('R' * $10000) + ('P' * $100) + 'T';			! PRPT
-Constant FYC_LOCATION = ('L' * $1000000) + ('O' * $10000) + ('C' * $100) + 'N';			! LOCN
-Constant FYC_SCORE = ('S' * $1000000) + ('C' * $10000) + ('O' * $100) + 'R';			! SCOR
-Constant FYC_TIME = ('T' * $1000000) + ('I' * $10000) + ('M' * $100) + 'E';			! TIME
-Constant FYC_DEATH = ('D' * $1000000) + ('E' * $10000) + ('A' * $100) + 'D';			! DEAD
-Constant FYC_ENDGAME = ('E' * $1000000) + ('N' * $10000) + ('D' * $100) + 'G';			! ENDG
-Constant FYC_TURN = ('T' * $1000000) + ('U' * $10000) + ('R' * $100) + 'N';			! TURN
-Constant FYC_STORYINFO = ('I' * $1000000) + ('N' * $10000) + ('F' * $100) + 'O';			! INFO
+Constant FYC_MAIN = ('M' * $1000000) + ('A' * $10000) + ('I' * $100) + 'N';						! MAIN
+Constant FYC_PROMPT = ('P' * $1000000) + ('R' * $10000) + ('P' * $100) + 'T';					! PRPT
+Constant FYC_LOCATION = ('L' * $1000000) + ('O' * $10000) + ('C' * $100) + 'N';				! LOCN
+Constant FYC_SCORE = ('S' * $1000000) + ('C' * $10000) + ('O' * $100) + 'R';					! SCOR
+Constant FYC_TIME = ('T' * $1000000) + ('I' * $10000) + ('M' * $100) + 'E';						! TIME
+Constant FYC_DEATH = ('D' * $1000000) + ('E' * $10000) + ('A' * $100) + 'D';					! DEAD
+Constant FYC_ENDGAME = ('E' * $1000000) + ('N' * $10000) + ('D' * $100) + 'G';				! ENDG
+Constant FYC_TURN = ('T' * $1000000) + ('U' * $10000) + ('R' * $100) + 'N';					! TURN
+Constant FYC_STORYINFO = ('I' * $1000000) + ('N' * $10000) + ('F' * $100) + 'O';				! INFO
 Constant FYC_SCORENOTIFY = ('S' * $1000000) + ('N' * $10000) + ('O' * $100) + 'T';			! SNOT
-Constant FYC_BANNER = ('B' * $1000000) + ('A' * $10000) + ('N' * $100) + 'N';			! BANN
+Constant FYC_BANNER = ('B' * $1000000) + ('A' * $10000) + ('N' * $100) + 'N';				! BANN
 Constant FYC_GAMENOTIFY = ('N' * $1000000) + ('O' * $10000) + ('T' * $100) + 'F';			! NOTF
-Constant FYC_IOBJ = ('I' * $1000000) + ('O' * $10000) + ('B' * $100) + 'J';			! IOBJ
+Constant FYC_IOBJ = ('I' * $1000000) + ('O' * $10000) + ('B' * $100) + 'J';						! IOBJ
+Constant FYC_PROLOGUE = ('P' * $1000000) + ('L' * $10000) + ('O' * $100) + 'G';				!PLOG
+Constant FYC_COMMANDS = ('C' * $1000000) + ('O' * $10000) + ('M' * $100) + 'M';			!COMM
+Constant FYC_DIALOGUE = ('D' * $1000000) + ('L' * $10000) + ('O' * $100) + 'G';				!DLOG
+Constant FYC_DIRECTIONS = ('D' * $1000000) + ('I' * $10000) + ('R' * $100) + 'T';				!DIRT
 
 ! Slots for FY_SETVENEER.
 Constant FYV_Z__Region = 1;
@@ -1330,13 +1334,24 @@ To Select the Story Info Channel:
 
 To Select the Score Notification Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORENOTIFY); -).
-	
+
 To Select the Game Notification Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_GAMENOTIFY); -).
-	
+
+To Select the Prologue Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_PROLOGUE); -);
+
 To Select the Objects Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_IOBJ); -).
-		
+
+To Select the Commands Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_COMMANDS); -).
+
+To Select the Dialogue Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_DIALOGUE); -).
+
+To Select the Directions Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_DIRECTIONS); -).
 
 Section 1b - Required Channels - Not For Release
 
@@ -1354,6 +1369,9 @@ To Change the Prompt to (T - text):
 To Select the Location Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_LOCATION); else print "** Location Channel ON **"; -).
 
+To Select the Prologue Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_PROLOGUE); else print "** Prologue channel ON **^";  -);
+
 To Select the Score Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORE); else print "** Score Channel ON **"; -).
 
@@ -1365,7 +1383,7 @@ To Select the Death Channel:
 
 To Select the Turn Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_TURN); else print "** Turn Channel ON **"; -).
-	
+
 To Select the Banner Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_BANNER); else print "** Banner Channel ON **"; -).
 
@@ -1374,12 +1392,21 @@ To Select the Story Info Channel:
 
 To Select the Score Notification Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_SCORENOTIFY); else print "** Score Notification channel ON **";  -).
-	
+
 To Select the Game Notification Channel:
 	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_GAMENOTIFY); else print "** Game Notification channel ON **";  -).
-	
+
 To Select the Objects Channel:
-	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_IOBJ); else print "** Objects channel ON **";  -)
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_IOBJ); else print "** Objects channel ON **";  -).
+
+To Select the Commands Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_COMMANDS); else print "** Commands channel ON **";  -)
+
+To Select the Dialogue Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_DIALOGUE); else print "** Dialogue channel ON **";  -)
+
+To Select the Directions Channel:
+	(- if (is_fyrevm) FyreCall(FY_CHANNEL, FYC_DIRECTIONS); else print "** Directions channel ON **";  -)
 
 Chapter 5 - Transition Requested
 
@@ -1392,27 +1419,27 @@ When play begins while outputting channels (this is the story info channel rule)
 	select the story info channel;
 	say "{ [quotation mark]storyTitle[quotation mark]: [quotation mark][story title][quotation mark], [quotation mark]storyHeadline[quotation mark]: [quotation mark][story headline][quotation mark], [quotation mark]storyAuthor[quotation mark]: [quotation mark][story author][quotation mark], [quotation mark]storyCreationYear[quotation mark]: [quotation mark][story creation year][quotation mark], [quotation mark]releaseNumber[quotation mark]: [quotation mark][release number][quotation mark], [quotation mark]serialNumber[quotation mark]: [quotation mark][story serial number][quotation mark], [quotation mark]inform7Build[quotation mark]: [quotation mark][I7 version number][quotation mark], [quotation mark]inform6Library[quotation mark]: [quotation mark][I6 library number][quotation mark], [quotation mark]inform7Library[quotation mark]: [quotation mark][I7 library number][quotation mark], [quotation mark]strictMode[quotation mark]: [quotation mark][strict mode][quotation mark], [quotation mark]debugMode[quotation mark]: [quotation mark][debug mode][quotation mark] }";
 	select the main channel.
-	
+
 Chapter 7 - Banner
 
 Before printing the banner text:
 	select the Banner Channel.
-	
-After printing the banner text: 
+
+After printing the banner text:
 	follow the objects channel rule.
 
 Chapter 8 - Objects
 
 Every turn (this is the objects channel rule):
 	select the objects channel;
-	let L be the list of visible things that are not the player;
+	let L be the list of visible objects that are not the player;
 	let entries be the number of entries in L;
-	say "{[no line break]";
+	say "{[quotation mark]objects[quotation mark]: [bracket][no line break]";
 	repeat with item running through L:
-		say "[quotation mark][item][quotation mark][no line break]";
+		say "{[quotation mark]text[quotation mark] : [quotation mark][item][quotation mark]}[no line break]";
 		unless item is entry entries in L:
 			say ",[no line break]";
-	say "}";
+	say "[close bracket]}";
 	select the main channel;
 
 Chapter 9 - Saving and restoring
@@ -1422,14 +1449,83 @@ Check saving the game:
 
 Report saving the game:
 	select the main channel.
-	
+
 Check restoring the game:
 	select the game notification channel.
 
 Report restoring the game:
 	select the main channel.
 
-Chapter 10 - Miscellany
+Chapter 10 - Directions
+
+When play begins while outputting channels:
+	follow the directions channel rule.
+
+Every turn (this is the directions channel rule):
+	select the directions channel;
+	let D be the list of directions;
+	let possible directions be a list of directions;
+	now possible directions is {};
+	repeat with dirt running through D:
+		unless the room-or-door dirt of location is nothing:
+			add dirt to possible directions;
+	say "{[quotation mark]directions[quotation mark] : [bracket][no line break]";
+	let entriesD be the number of entries in possible directions;
+	repeat with dirt running through possible directions:
+		say "{[quotation mark]text[quotation mark]: [quotation mark][dirt][quotation mark]}[no line break]";
+		unless dirt is entry entriesD in possible directions:
+			say ", [no line break]";
+	say "[close bracket]}";
+	select the main channel.
+
+Chapter 11 - Commands
+
+Command is a kind of object. A command has some text called Display text. A command has some text called Execution text. A command has a list of texts called variables. Variables of a command is usually { "object" }.  A command can be accessible or inaccessible. A command is usually accessible. A command has a number called Button span. Button span of a command is usually 3.
+
+Examine, Look, take, give, talk, toggle device, toggle open, toggle lock, read, drop, push, pull are commands.
+
+Display text of Examine is "Examine". Examine has execution text "examine var1".
+Display text of Look is "Look". Look has variables {}. Look has execution text "look".
+Display text of Take is "Take".  Take has execution text "take var1".
+Display text of Give is "Give".  Give has execution text "give var1".
+Display text of Toggle Device is "On/Off".  Toggle Device has execution text "toggle device var1".
+Display text of Toggle open is "Open/Close".  Toggle open has execution text "toggle open var1".
+Display text of Toggle Lock is "Lock/Unlock".  Toggle lock has execution text "toggle lock var1".
+Display text of Talk is "Talk". Talk has execution text "talk to var1 about var2". Talk has variables { "person" ,  "subject"}.
+Display text of Read is "Read". Read has execution text "read var1".
+Display text of Drop is "Drop". Drop has execution text "drop var1".
+Display text of Push is "Push". Push has execution text "push var1 var2". Push has variables { "object", "direction"}.
+Display text of Pull is "Pull". Pull has execution text "pull var1 var2". Pull has variables { "object", "direction"}.
+
+[DefaultComm is a list of commands. DefaultComm is always  {Examine, look, take, give, toggle device, toggle open, toggle lock, talk, read, push, pull}.]
+
+When play begins while outputting channels:
+	follow the commands channel rule.
+
+Every turn (this is the commands channel rule):
+	select the commands channel;
+	say "{[quotation mark]commands[quotation mark]: [bracket][no line break]";
+	let C be the list of accessible commands;
+	let entriesC be the number of entries in C;
+	repeat with comm running through C:
+		say "{[quotation mark]text[quotation mark] : [quotation mark][display text of comm][quotation mark], [quotation mark]execution[quotation mark]: [quotation mark][execution text of comm][quotation mark], [quotation mark]span[quotation mark]: [quotation mark][button span of comm][quotation mark], [quotation mark]variables[quotation mark]: [bracket][no line break]";
+		let V be variables of comm;
+		if number of entries in V is 0:
+			say "[close bracket]}[no line break]";
+		otherwise:
+			repeat with var running through V:
+				let entriesV be the number of entries in V;
+				say "[quotation mark][var][quotation mark][no line break]";
+				unless var is entry entriesV in V:
+					say ", [no line break]";
+				otherwise:
+					say "[close bracket]}[no line break]";
+		unless comm is entry entriesC in C:
+			say ", [no line break]";
+	say "[close bracket]}";
+	select the main channel.
+
+Chapter 12 - Miscellany
 
 Include (-
 
@@ -1484,10 +1580,20 @@ Game Notification (NOTF) - The game notifications channel contains the text for 
 Score Notification (SNOT) - When scoring is used and the score changes, the change value (up or down) will be posted to this channel.
 
 
+For Prologue Channel:
+
+The author should add the following code to their game file:
+
+	When play begins while outputting channels (this is the prologue channel rule):
+		select the prologue channel;
+		say "This is the prologue.";
+		select the main channel.
+
+
 For Objects Channel:
 
 In source text you have to include a command like:
-	
+
 	Every turn:
 		select the objects channel;
 		let L be the list of visible things that are not the player; [you can include your own description to make certain objects accessible or inaccessible through list]
@@ -1501,4 +1607,17 @@ In source text you have to include a command like:
 		select the main channel.
 
 
+For Commands Channel:
 
+In this extension you will find that there is new kind of thing defined called Command. Command has properties -
+display text - this is the text that will be displayed to the mobile user.
+execution text - this is the text that will be sent in the background to quixe service when user clicks on a control button. Usually this is set to "[the command understood] var1". var1 will have to be replaced by the object that user chooses following the command by the controller code before sending to quixe service.
+no of vars - this is the number of variables that the command takes to define the task it performs completely. Usually it is set to 1.
+
+
+Commands are set to have either/or property of accessible or inaccessible. Default is accessible. Any author can choose to make commands inaccessible at certain moments in game or from the start of play. Authors can also create new commands like you would create any other thing or kind thing.
+
+Example:-
+xyz is a command. display text of xyz is "blah blah". no of vars of xyz is 2. execution text of xyz is "xyz var1 with var2".
+
+You can build your own list of commands and put that in place of the original by ruling out the commands channel rule in every turn rulebook. Then, you can also switch back to default commands by saying (your commands list being outputted) is defaultComm. DefaultComm contains the commands {Examine, Look, Take, Give, Toggle Device, Toggle Openable, toggle lock, talk, read, drop, push, pull}.
